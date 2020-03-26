@@ -8,7 +8,7 @@ defmodule Membrane.RTP.Opus.Mixfile do
     [
       app: :membrane_rtp_opus,
       version: @version,
-      elixir: "~> 1.10",
+      elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
