@@ -18,6 +18,11 @@ defmodule Membrane.RTP.Opus.Depayloader do
     caps: Opus.Description
 
   @impl true
+  def handle_caps(:input, _caps, _context, state) do
+    {:ok, state}
+  end
+
+  @impl true
   def handle_process(:input, buffer, _ctx, state) do
     {{:ok, buffer: {:output, buffer}}, state}
   end
