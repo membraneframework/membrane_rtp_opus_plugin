@@ -8,7 +8,7 @@ defmodule Membrane.RTP.Opus.Mixfile do
     [
       app: :membrane_rtp_opus,
       version: @version,
-      elixir: "~> 1.10",
+      elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -38,7 +38,6 @@ defmodule Membrane.RTP.Opus.Mixfile do
     [
       {:membrane_core, "~> 0.5.0"},
       {:membrane_caps_rtp, "~> 0.1"},
-      {:membrane_opus_format, "~> 0.2.0"},
       {:ex_doc, "~> 0.21.0", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false}
     ]
