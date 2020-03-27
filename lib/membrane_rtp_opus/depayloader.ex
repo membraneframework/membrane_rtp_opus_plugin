@@ -8,14 +8,13 @@ defmodule Membrane.RTP.Opus.Depayloader do
   use Membrane.Filter
 
   alias Membrane.Caps.RTP
-  alias Membrane.Opus
 
   def_input_pad :input,
     caps: {RTP, payload_type: :dynamic},
     demand_unit: :buffers
 
   def_output_pad :output,
-    caps: Opus.Description
+    caps: :any
 
   @impl true
   def handle_caps(:input, _caps, _context, state) do
