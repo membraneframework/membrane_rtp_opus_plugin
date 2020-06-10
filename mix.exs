@@ -2,11 +2,11 @@ defmodule Membrane.RTP.Opus.Mixfile do
   use Mix.Project
 
   @version "0.0.0"
-  @github_url "https://github.com/membraneframework/membrane_rtp_opus"
+  @github_url "https://github.com/membraneframework/membrane_rtp_opus_plugin"
 
   def project do
     [
-      app: :membrane_rtp_opus,
+      app: :membrane_rtp_opus_plugin,
       version: @version,
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
