@@ -27,7 +27,8 @@ defmodule Membrane.RTP.Opus.Mixfile do
 
   def application do
     [
-      extra_applications: []
+      extra_applications: [],
+      mod: {Membrane.RTP.Opus.Plugin.App, []}
     ]
   end
 
@@ -37,7 +38,11 @@ defmodule Membrane.RTP.Opus.Mixfile do
   defp deps do
     [
       {:membrane_core, "~> 0.5.0"},
-      {:membrane_caps_rtp, "~> 0.1"},
+      {:membrane_rtp_format, github: "membraneframework/membrane_rtp_format", branch: :develop},
+      {:membrane_opus_format,
+       github: "membraneframework/membrane_opus_format", branch: "no-bitrate"},
+      {:membrane_stream_format,
+       github: "membraneframework/membrane_stream_format", branch: :develop},
       {:ex_doc, "~> 0.21.0", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false}
     ]

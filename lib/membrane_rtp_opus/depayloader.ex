@@ -7,18 +7,15 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   use Membrane.Filter
 
-  alias Membrane.Caps.RTP
+  alias Membrane.{Opus, RTP, Stream}
 
-  def_input_pad :input,
-    caps: {RTP, payload_type: :dynamic},
-    demand_unit: :buffers
+  def_input_pad :input, caps: RTP, demand_unit: :buffers
 
-  def_output_pad :output,
-    caps: :any
+  def_output_pad :output, caps: {Stream, type: :packet_stream, content: Opus}
 
   @impl true
   def handle_caps(:input, _caps, _context, state) do
-    {:ok, state}
+    {{:ok, caps: {:output, %Stream{type: :packet_stream, content: Opus}}}, state}
   end
 
   @impl true
@@ -29,9 +26,5 @@ defmodule Membrane.RTP.Opus.Depayloader do
   @impl true
   def handle_demand(:output, size, :buffers, _ctx, state) do
     {{:ok, demand: {:input, size}}, state}
-  end
-
-  def handle_demand(:output, _size, :bytes, _ctx, state) do
-    {{:error, :not_supported_unit}, state}
   end
 end

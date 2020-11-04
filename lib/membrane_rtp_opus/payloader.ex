@@ -7,18 +7,20 @@ defmodule Membrane.RTP.Opus.Payloader do
 
   use Membrane.Filter
 
-  alias Membrane.{RTP, Opus}
+  alias Membrane.{Opus, RTP, Stream}
 
   def_input_pad :input,
-    caps: {Opus, self_delimiting?: false},
+    caps: [
+      {Opus, self_delimiting?: false},
+      {Stream, type: :packet_stream, content: one_of([nil, Opus])}
+    ],
     demand_unit: :buffers
 
-  def_output_pad :output, caps: {RTP, payload_type: 120}
+  def_output_pad :output, caps: RTP
 
   @impl true
   def handle_caps(:input, _caps, _ctx, state) do
-    caps = %RTP{payload_type: 120}
-    {{:ok, caps: {:output, caps}}, state}
+    {{:ok, caps: {:output, %RTP{}}}, state}
   end
 
   @impl true
@@ -29,9 +31,5 @@ defmodule Membrane.RTP.Opus.Payloader do
   @impl true
   def handle_demand(:output, size, :buffers, _ctx, state) do
     {{:ok, demand: {:input, size}}, state}
-  end
-
-  def handle_demand(:output, _size, :bytes, _ctx, state) do
-    {{:error, :not_supported_unit}, state}
   end
 end
