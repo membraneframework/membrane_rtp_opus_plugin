@@ -1,4 +1,4 @@
-defmodule Membrane.RTP.Opus.Depayloader do
+defmodule Membrane.RTP.Opus.Payloader do
   @moduledoc """
   Parses RTP payloads into parseable Opus packets.
 
@@ -9,13 +9,18 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   alias Membrane.{Opus, RTP, Stream}
 
-  def_input_pad :input, caps: RTP, demand_unit: :buffers
+  def_input_pad :input,
+    caps: [
+      {Opus, self_delimiting?: false},
+      {Stream, type: :packet_stream, content: one_of([nil, Opus])}
+    ],
+    demand_unit: :buffers
 
-  def_output_pad :output, caps: {Stream, type: :packet_stream, content: Opus}
+  def_output_pad :output, caps: RTP
 
   @impl true
-  def handle_caps(:input, _caps, _context, state) do
-    {{:ok, caps: {:output, %Stream{type: :packet_stream, content: Opus}}}, state}
+  def handle_caps(:input, _caps, _ctx, state) do
+    {{:ok, caps: {:output, %RTP{}}}, state}
   end
 
   @impl true
