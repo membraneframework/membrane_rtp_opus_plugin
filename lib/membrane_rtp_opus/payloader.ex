@@ -7,12 +7,12 @@ defmodule Membrane.RTP.Opus.Payloader do
 
   use Membrane.Filter
 
-  alias Membrane.{Opus, RTP, Stream}
+  alias Membrane.{Opus, RTP, RemoteStream}
 
   def_input_pad :input,
     caps: [
       {Opus, self_delimiting?: false},
-      {Stream, type: :packet_stream, content: one_of([nil, Opus])}
+      {RemoteStream, type: :packetized, content_format: one_of([nil, Opus])}
     ],
     demand_unit: :buffers
 
