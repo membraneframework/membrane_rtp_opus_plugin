@@ -3,7 +3,7 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/membrane_rtp_opus_plugin.svg)](https://hex.pm/packages/membrane_rtp_opus_plugin)
 [![CircleCI](https://circleci.com/gh/membraneframework/membrane_rtp_opus_plugin.svg?style=svg)](https://circleci.com/gh/membraneframework/membrane_rtp_opus_plugin)
 
-This package provides elements that can be used for depayloading Opus audio.
+RTP payloader and depayloader for OPUS audio.
 
 It is part of [Membrane Multimedia Framework](https://membraneframework.org).
 
