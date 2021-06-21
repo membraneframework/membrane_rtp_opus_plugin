@@ -3,7 +3,7 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
 
   import Membrane.Testing.Assertions
 
-  alias Membrane.Pipeline
+  alias Membrane.{Pipeline, RTP}
   alias Membrane.RTP.Opus.Depayloader
   alias Membrane.Testing
 
@@ -19,7 +19,7 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
       {:ok, pid} =
         Testing.Pipeline.start_link(%Testing.Pipeline.Options{
           elements: [
-            source: %Testing.Source{output: data},
+            source: %Testing.Source{output: data, caps: %RTP{}},
             depayloader: Depayloader,
             sink: %Testing.Sink{}
           ]
@@ -30,6 +30,8 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
       for elem <- base_range do
         assert_sink_buffer(pid, :sink, %Membrane.Buffer{payload: <<^elem::256>>})
       end
+
+      Pipeline.stop_and_terminate(pid, blocking?: true)
     end
   end
 end

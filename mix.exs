@@ -1,7 +1,7 @@
 defmodule Membrane.RTP.Opus.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.3.0"
   @github_url "https://github.com/membraneframework/membrane_rtp_opus_plugin"
 
   def project do
@@ -37,11 +37,10 @@ defmodule Membrane.RTP.Opus.Mixfile do
 
   defp deps do
     [
-      {:membrane_core, "~> 0.6.0"},
+      {:membrane_core, "~> 0.7.0"},
       {:membrane_rtp_format, "~> 0.3.0"},
       {:membrane_opus_format, "~> 0.3.0"},
-      {:membrane_remote_stream_format, "~> 0.1.0"},
-      {:ex_doc, "~> 0.21.0", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.24.0", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false}
     ]
   end
@@ -60,7 +59,7 @@ defmodule Membrane.RTP.Opus.Mixfile do
   defp docs do
     [
       main: "readme",
-      extras: ["README.md"],
+      extras: ["LICENSE", "README.md"],
       source_ref: "v#{@version}",
       nest_modules_by_prefix: [Membrane.RTP.Opus]
     ]
