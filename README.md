@@ -14,7 +14,7 @@ The package can be installed by adding `membrane_rtp_opus_plugin` to your list o
 ```elixir
 def deps do
   [
-    {:membrane_rtp_opus_plugin, "~> 0.4.0"}
+    {:membrane_rtp_opus_plugin, "~> 0.5.0"}
   ]
 end
 ```
