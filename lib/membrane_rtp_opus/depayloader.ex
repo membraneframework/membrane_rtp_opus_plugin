@@ -7,7 +7,7 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   use Membrane.Filter
 
-  alias Membrane.{Opus, RTP, RemoteStream}
+  alias Membrane.{Opus, RemoteStream, RTP}
 
   def_input_pad :input, caps: RTP, demand_unit: :buffers
 

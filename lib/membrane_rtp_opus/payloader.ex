@@ -7,7 +7,7 @@ defmodule Membrane.RTP.Opus.Payloader do
 
   use Membrane.Filter
 
-  alias Membrane.{Opus, RTP, RemoteStream}
+  alias Membrane.{Opus, RemoteStream, RTP}
 
   def_input_pad :input,
     caps: [

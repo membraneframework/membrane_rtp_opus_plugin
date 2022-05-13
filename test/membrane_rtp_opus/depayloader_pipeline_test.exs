@@ -3,9 +3,8 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
 
   import Membrane.Testing.Assertions
 
-  alias Membrane.{Pipeline, ParentSpec, RTP}
+  alias Membrane.{ParentSpec, Pipeline, RTP, Testing}
   alias Membrane.RTP.Opus.Depayloader
-  alias Membrane.Testing
 
   describe "Depayloader in a pipeline" do
     test "does not crash when processing garbage" do
