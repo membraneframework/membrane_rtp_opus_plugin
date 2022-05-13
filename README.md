@@ -1,6 +1,7 @@
 # Membrane RTP Opus plugin
 
 [![Hex.pm](https://img.shields.io/hexpm/v/membrane_rtp_opus_plugin.svg)](https://hex.pm/packages/membrane_rtp_opus_plugin)
+[![API Docs](https://img.shields.io/badge/api-docs-yellow.svg?style=flat)](https://hexdocs.pm/membrane_rtp_opus_plugin)
 [![CircleCI](https://circleci.com/gh/membraneframework/membrane_rtp_opus_plugin.svg?style=svg)](https://circleci.com/gh/membraneframework/membrane_rtp_opus_plugin)
 
 RTP payloader and depayloader for OPUS audio.
