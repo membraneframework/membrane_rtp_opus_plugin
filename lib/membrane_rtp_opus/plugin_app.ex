@@ -3,6 +3,7 @@ defmodule Membrane.RTP.Opus.Plugin.App do
   use Application
   alias Membrane.RTP.{Opus, PayloadFormat}
 
+  @spec start(term, term) :: {:error, term} | {:ok, pid}
   def start(_type, _args) do
     PayloadFormat.register(%PayloadFormat{
       encoding_name: :OPUS,
