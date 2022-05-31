@@ -8,7 +8,8 @@ defmodule Membrane.RTP.Opus.Plugin.App do
       encoding_name: :OPUS,
       payload_type: 120,
       payloader: Opus.Payloader,
-      depayloader: Opus.Depayloader
+      depayloader: Opus.Depayloader,
+      frame_detector: fn _payload -> true end
     })
 
     PayloadFormat.register_payload_type_mapping(120, :OPUS, 48_000)
