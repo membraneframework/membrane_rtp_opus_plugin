@@ -38,7 +38,7 @@ defmodule Membrane.RTP.Opus.Mixfile do
   defp deps do
     [
       {:membrane_core, "~> 0.10.0"},
-      {:membrane_rtp_format, "~> 0.4.0"},
+      {:membrane_rtp_format, github: "membraneframework/membrane_rtp_format"},
       {:membrane_opus_format, "~> 0.3.0"},
       {:ex_doc, "~> 0.24.0", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0", only: :dev, runtime: false}
