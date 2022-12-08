@@ -10,17 +10,19 @@ defmodule Membrane.RTP.Opus.Payloader do
   alias Membrane.{Opus, RTP, RemoteStream}
 
   def_input_pad :input,
-    caps: [
-      {Opus, self_delimiting?: false},
-      {RemoteStream, type: :packetized, content_format: one_of([nil, Opus])}
-    ],
+    accepted_format:
+      [
+        %Opus{self_delimiting?: false},
+        %RemoteStream{type: :packetized, content_format: content_format}
+      ]
+      when content_format in [Opus, nil],
     demand_unit: :buffers
 
-  def_output_pad :output, caps: RTP
+  def_output_pad :output, accepted_format: RTP
 
   @impl true
-  def handle_caps(:input, _caps, _ctx, state) do
-    {{:ok, caps: {:output, %RTP{}}}, state}
+  def handle_stream_format(:input, _stream_format, _ctx, state) do
+    {{:ok, stream_format: {:output, %RTP{}}}, state}
   end
 
   @impl true

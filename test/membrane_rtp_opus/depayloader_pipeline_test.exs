@@ -20,7 +20,7 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
         Testing.Pipeline.start_link(
           links:
             ParentSpec.link_linear(
-              source: %Testing.Source{output: data, caps: %RTP{}},
+              source: %Testing.Source{output: data, stream_format: %RTP{}},
               depayloader: Depayloader,
               sink: %Testing.Sink{}
             )
