@@ -15,17 +15,26 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   @impl true
   def handle_stream_format(:input, _stream_format, _context, state) do
-    {{:ok, stream_format: {:output, %RemoteStream{type: :packetized, content_format: Opus}}},
-     state}
+    {
+      [
+        stream_format:
+          {:output,
+           %RemoteStream{
+             type: :packetized,
+             content_format: Opus
+           }}
+      ],
+      state
+    }
   end
 
   @impl true
   def handle_process(:input, buffer, _ctx, state) do
-    {{:ok, buffer: {:output, buffer}}, state}
+    {[buffer: {:output, buffer}], state}
   end
 
   @impl true
   def handle_demand(:output, size, :buffers, _ctx, state) do
-    {{:ok, demand: {:input, size}}, state}
+    {[demand: {:input, size}], state}
   end
 end
