@@ -14,7 +14,8 @@ defmodule Membrane.RTP.Opus.Payloader do
       any_of(
         %Opus{self_delimiting?: false},
         %RemoteStream{type: :packetized, content_format: content_format}
-      when content_format in [Opus, nil]),
+        when content_format in [Opus, nil]
+      ),
     demand_unit: :buffers
 
   def_output_pad :output, accepted_format: RTP
