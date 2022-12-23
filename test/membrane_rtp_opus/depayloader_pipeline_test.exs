@@ -28,6 +28,8 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
       for elem <- base_range do
         assert_sink_buffer(pipeline, :sink, %Membrane.Buffer{payload: <<^elem::256>>})
       end
+
+      Testing.Pipeline.terminate(pipeline, blocking?: true)
     end
   end
 end
