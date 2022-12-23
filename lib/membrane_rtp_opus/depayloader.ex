@@ -7,24 +7,24 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   use Membrane.Filter
 
-  alias Membrane.{Opus, RTP, RemoteStream}
+  alias Membrane.{Opus, RemoteStream, RTP}
 
-  def_input_pad :input, caps: RTP, demand_unit: :buffers
+  def_input_pad :input, accepted_format: RTP, demand_mode: :auto
 
-  def_output_pad :output, caps: {RemoteStream, type: :packetized, content_format: Opus}
+  def_output_pad :output,
+    accepted_format: %RemoteStream{type: :packetized, content_format: Opus},
+    demand_mode: :auto
 
   @impl true
-  def handle_caps(:input, _caps, _context, state) do
-    {{:ok, caps: {:output, %RemoteStream{type: :packetized, content_format: Opus}}}, state}
+  def handle_stream_format(:input, _stream_format, _context, state) do
+    {
+      [stream_format: {:output, %RemoteStream{type: :packetized, content_format: Opus}}],
+      state
+    }
   end
 
   @impl true
   def handle_process(:input, buffer, _ctx, state) do
-    {{:ok, buffer: {:output, buffer}}, state}
-  end
-
-  @impl true
-  def handle_demand(:output, size, :buffers, _ctx, state) do
-    {{:ok, demand: {:input, size}}, state}
+    {[buffer: {:output, buffer}], state}
   end
 end

@@ -1,9 +1,10 @@
 defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
   use ExUnit.Case
 
+  import Membrane.ChildrenSpec
   import Membrane.Testing.Assertions
 
-  alias Membrane.{Pipeline, ParentSpec, RTP}
+  alias Membrane.RTP
   alias Membrane.RTP.Opus.Depayloader
   alias Membrane.Testing
 
@@ -16,21 +17,19 @@ defmodule Membrane.RTP.Opus.DepayloaderPipelineTest do
           <<elem::256>>
         end
 
-      {:ok, pid} =
-        Testing.Pipeline.start_link(
-          links:
-            ParentSpec.link_linear(
-              source: %Testing.Source{output: data, caps: %RTP{}},
-              depayloader: Depayloader,
-              sink: %Testing.Sink{}
-            )
+      pipeline =
+        Testing.Pipeline.start_link_supervised!(
+          structure:
+            child(:source, %Testing.Source{output: data, stream_format: %RTP{}})
+            |> child(:depayloader, Depayloader)
+            |> child(:sink, %Testing.Sink{})
         )
 
       for elem <- base_range do
-        assert_sink_buffer(pid, :sink, %Membrane.Buffer{payload: <<^elem::256>>})
+        assert_sink_buffer(pipeline, :sink, %Membrane.Buffer{payload: <<^elem::256>>})
       end
 
-      Pipeline.terminate(pid, blocking?: true)
+      Testing.Pipeline.terminate(pipeline, blocking?: true)
     end
   end
 end
