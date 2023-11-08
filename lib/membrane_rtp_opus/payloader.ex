@@ -15,10 +15,9 @@ defmodule Membrane.RTP.Opus.Payloader do
         %Opus{self_delimiting?: false},
         %RemoteStream{type: :packetized, content_format: content_format}
         when content_format in [Opus, nil]
-      ),
-    demand_mode: :auto
+      )
 
-  def_output_pad :output, accepted_format: RTP, demand_mode: :auto
+  def_output_pad :output, accepted_format: RTP
 
   @impl true
   def handle_stream_format(:input, _stream_format, _ctx, state) do
@@ -26,7 +25,7 @@ defmodule Membrane.RTP.Opus.Payloader do
   end
 
   @impl true
-  def handle_process(:input, buffer, _ctx, state) do
+  def handle_buffer(:input, buffer, _ctx, state) do
     {[buffer: {:output, buffer}], state}
   end
 end
