@@ -9,11 +9,10 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   alias Membrane.{Opus, RemoteStream, RTP}
 
-  def_input_pad :input, accepted_format: RTP, demand_mode: :auto
+  def_input_pad :input, accepted_format: RTP
 
   def_output_pad :output,
-    accepted_format: %RemoteStream{type: :packetized, content_format: Opus},
-    demand_mode: :auto
+    accepted_format: %RemoteStream{type: :packetized, content_format: Opus}
 
   @impl true
   def handle_stream_format(:input, _stream_format, _context, state) do
@@ -24,7 +23,7 @@ defmodule Membrane.RTP.Opus.Depayloader do
   end
 
   @impl true
-  def handle_process(:input, buffer, _ctx, state) do
+  def handle_buffer(:input, buffer, _ctx, state) do
     {[buffer: {:output, buffer}], state}
   end
 end
