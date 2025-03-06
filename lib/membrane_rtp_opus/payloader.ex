@@ -17,11 +17,11 @@ defmodule Membrane.RTP.Opus.Payloader do
         when content_format in [Opus, nil]
       )
 
-  def_output_pad :output, accepted_format: RTP
+  def_output_pad :output, accepted_format: %RTP{payload_format: Opus}
 
   @impl true
   def handle_stream_format(:input, _stream_format, _ctx, state) do
-    {[stream_format: {:output, %RTP{}}], state}
+    {[stream_format: {:output, %RTP{payload_format: Opus}}], state}
   end
 
   @impl true

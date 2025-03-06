@@ -9,7 +9,7 @@ defmodule Membrane.RTP.Opus.Depayloader do
 
   alias Membrane.{Opus, RemoteStream, RTP}
 
-  def_input_pad :input, accepted_format: RTP
+  def_input_pad :input, accepted_format: %RTP{payload_format: format} when format in [nil, Opus]
 
   def_output_pad :output,
     accepted_format: %RemoteStream{type: :packetized, content_format: Opus}
