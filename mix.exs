@@ -41,9 +41,9 @@ defmodule Membrane.RTP.Opus.Mixfile do
       {:membrane_core, "~> 1.0"},
       {:membrane_rtp_format, "~> 0.11.0"},
       {:membrane_opus_format, "~> 0.3.0"},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:dialyxir, ">= 0.0.0", only: :dev, runtime: false},
-      {:credo, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4", only: :dev, runtime: false},
+      {:credo, "~> 1.7", only: :dev, runtime: false}
     ]
   end
 
