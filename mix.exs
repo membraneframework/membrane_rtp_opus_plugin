@@ -49,8 +49,7 @@ defmodule Membrane.RTP.Opus.Mixfile do
 
   defp dialyzer() do
     opts = [
-      flags: [:error_handling],
-      plt_add_apps: [:syntax_tools]
+      flags: [:error_handling]
     ]
 
     if System.get_env("CI") == "true" do
